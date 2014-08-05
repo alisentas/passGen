@@ -1,4 +1,3 @@
-$('document').ready(function(){	
 	var calculateProgress = function(){
 		var $length = parseInt($('#length').prop('value'),10);
 		var $isReadable = $('#isReadable').prop('checked');
@@ -46,7 +45,8 @@ $('document').ready(function(){
 		}
 		return progressLevel;
 	};
-	$('#generate').click(function(){
+	$('#generate').click(function(e){
+		e.preventDefault();
 		var $length = parseInt($('#length').prop('value'),10);
 		var $isReadable = $('#isReadable').prop('checked');
 		var $hasLetter = $('#hasLetter').prop('checked');
@@ -54,10 +54,17 @@ $('document').ready(function(){
 		var $hasUpperCase = $('#hasUpperCase').prop('checked');
 		var $hasPunctuation = $('#hasPunctuation').prop('checked');
 		var pass = passGen($length,$isReadable,$hasLetter,$hasNumber,$hasUpperCase,$hasPunctuation) + "";
-		$('#password').html(pass);
+		$('#password').val(pass);
 	});
-	$('#generate, input, label').click(function(){
-		var x = '<progress max="100" value="' + calculateProgress() + '" />';
-		$('#progressbarContainer').html(x);
+	$('input').click(function(){
+		var progress = calculateProgress();
+		if(progress < 45){
+			$("#progress").html('<div class="progress-bar progress-bar-danger progress-bar-striped active"  role="progressbar" aria-valuenow="' + progress + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + progress + '%"><span class="sr-only">' + progress + '%</span></div>');
+		}else if(progress < 60){
+			$("#progress").html('<div class="progress-bar progress-bar-warning progress-bar-striped active"  role="progressbar" aria-valuenow="' + progress + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + progress + '%"><span class="sr-only">' + progress + '%</span></div>');
+		}else if(progress < 80){
+			$("#progress").html('<div class="progress-bar progress-bar-info progress-bar-striped active"  role="progressbar" aria-valuenow="' + progress + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + progress + '%"><span class="sr-only">' + progress + '%</span></div>');
+		}else{
+			$("#progress").html('<div class="progress-bar progress-bar-success progress-bar-striped active"  role="progressbar" aria-valuenow="' + progress + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + progress + '%"><span class="sr-only">' + progress + '%</span></div>');
+		}
 	});
-});
