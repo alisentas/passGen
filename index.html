@@ -1,1 +1,117 @@
-Hello World
+<html>
+<head>
+	<title>Ana Sayfa</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+	<script src="https://raw.githubusercontent.com/alisentas/passGen/master/js/passgen.js" type="text/javascript"></script>
+	<style>
+		body {
+			/* Full page background found from css-tricks.com
+			http://css-tricks.com/perfect-full-page-background-image/
+			*/
+			
+			background: url("http://securitysite.net/wp-content/uploads/2014/02/Frontpoint-vs-Simplisafe.jpg") no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		.panel {
+			margin-top: 20px;
+			opacity: 0.95
+		}
+		.form-group {
+			margin-bottom: 0;
+			margin-top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>Password Generator </h1>
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Password Length</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="length">
+								<span class="help-block">A length between 12-20 is recommended.</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" id="hasLetter"> Has Letters?
+										<span class="help-block">Should your password need letters, like a, b, d, g</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" id="hasUpperCase"> Has UpperCase Letters?
+										<span class="help-block">If you have letter option enabled, it's recommended to use uppercase letters in your password</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" id="hasNumber"> Has Numbers?
+										<span class="help-block">It's recommended to use every number in your password including irrational ones like pi and e</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" id="hasPunctuation"> Has Punctuation?
+										<span class="help-block">Generally recommended yo use punctuation and special characters like !,.+^#</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" id="isReadable"> Is readable?
+										<span class="help-block">Generally not recommended, if you want to have passwords that you can read, check this option, then you'll have passwords like: "abase" or "kottumi".</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div id="progress" class="progress">
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-2">
+								<button id="generate" class="btn btn-success">Generate</button>
+							</div>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="password">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="panel-footer">
+					<p>
+						Password generator is made by <a href="https://github.com/alisentas">Ali Þentaþ</a> and you can watch/star/fork it on <a href="https://github.com/alisentas/passGen">Github Project</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://raw.githubusercontent.com/alisentas/passGen/master/js/script.js" type="text/javascript"></script>
+</body>
+</html>
