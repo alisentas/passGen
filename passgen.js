@@ -90,6 +90,7 @@ var passGen = function(opts){
 				passwordSplit[i] = passwordSplit[i].toUpperCase();
 			}
 		}
+		password = passwordSplit.join("");
 	}
 	return password;
 };
