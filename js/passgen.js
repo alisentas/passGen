@@ -1,34 +1,36 @@
 var passGen = function(length,isReadable,hasLetter,hasNumber,hasUpperCase,hasPunctuation) {
     //password
-    var password = "";
+    var password = "",
 	//Declaring function parameters as number and boolean values
-	var length = length;
-	var isReadable = isReadable;
-	var hasLetter = hasLetter;
-	var hasNumber = hasNumber;
-	var hasUpperCase = hasUpperCase;
-	var hasPunctuation = hasPunctuation;
+	length = length,
+	isReadable = isReadable,
+	hasLetter = hasLetter,
+	hasNumber = hasNumber,
+	hasUpperCase = hasUpperCase,
+	hasPunctuation = hasPunctuation,
 	//Declaring characters
-	var consonants = ["b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","y","z","x","q","w"];
-	var consonants_length = consonants.length;
-	var vowels = ["a","e","i","o","u"];
-	var vowels_length = vowels.length;
-	var numbers = [0,1,2,3,4,5,6,7,8,9];
-	var numbers_length = numbers.length;
-	var punctuation = ["!","+","%","&","(",")","=","?","_","-","*","-","#","$","½","{","[","]","}",",",".","<",">"];
-	var punctuation_length = punctuation.length;
+	consonants = ["b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","y","z","x","q","w"],
+	consonants_length = consonants.length,
+	vowels = ["a","e","i","o","u"],
+	vowels_length = vowels.length,
+	numbers = [0,1,2,3,4,5,6,7,8,9],
+	numbers_length = numbers.length,
+	punctuation = ["!","+","%","&","(",")","=","?","_","-","*","-","#","$","½","{","[","]","}",",",".","<",">"],
+	punctuation_length = punctuation.length;
+	//Declaring required variables
+	var isPreviousVowel, isPreviousConsonant, isPreviousConsonantx2, i;
 	//Generating part
-	if(isReadable === true) {
-		var isPreviousVowel = false;
-		var isPreviousConsonant = false;
-		var isPreviousConsonantx2 = false;
+	if(isReadable) {
+		isPreviousVowel = false;
+		isPreviousConsonant = false;
+		isPreviousConsonantx2 = false;
 		var randNumber = Math.floor(Math.random()*2);
 		if(randNumber === 1){
 			isPreviousVowel = true;
 		}else{
 			isPreviousConsonant = true;
 		}
-		for(var i = 0; i < length; i++){
+		for(i = 0; i < length; i++){
 			//If previous letter is a vowel, add consonant
 			if(isPreviousVowel){
 				randNumber = Math.floor(Math.random() * consonants_length);
@@ -61,13 +63,11 @@ var passGen = function(length,isReadable,hasLetter,hasNumber,hasUpperCase,hasPun
 				isPreviousConsonantx2 = false;
 			}
 		}
-		var passNew = password;
 		if(hasUpperCase){
-			var passlength = passNew.length;
-			for(i = 0; i < passlength; i++){
+			for(i = 0; i < password.length; i++){
 				randNumber = Math.floor(Math.random() * 2);
 				if(randNumber === 1){
-					passNew[i] = passNew[i].toUpperCase();
+					password[i] = password[i].toUpperCase();
 				}
 			}
 		}
