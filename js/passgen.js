@@ -1,118 +1,95 @@
-var passGen = function(length,isReadable,hasLetter,hasNumber,hasUpperCase,hasPunctuation) {
-    //password
-    var password = "",
-	//Declaring function parameters as number and boolean values
-	length = length,
-	isReadable = isReadable,
-	hasLetter = hasLetter,
-	hasNumber = hasNumber,
-	hasUpperCase = hasUpperCase,
-	hasPunctuation = hasPunctuation,
-	//Declaring characters
-	consonants = ["b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","y","z","x","q","w"],
-	consonants_length = consonants.length,
-	vowels = ["a","e","i","o","u"],
-	vowels_length = vowels.length,
+// Password Generator Algorithm by alisentas
+
+var passGen = function(opts){
+	/**
+	 * opts object's structure:
+		opts = {
+	    	length: int,
+			readable: false,
+			letter: true,
+			number: true,
+			upperCase: true,
+			specialChar: false
+		}
+		*/
+	//Decleare every required variables
+	var password = "",
+	passwordSplit,
+	length = opts.length,
+	readable = opts.readable,
+	letter = opts.letter,
+	number = opts.number,
+	upperCase = opts.upperCase,
+	specialChar = opts.specialChar,
+	letters = {
+		//letter object, contains both consonants and vowels
+		//consonants and vowels are seperated because of the readability option
+		consonants: ["b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","y","z","x","q","w"],
+		vowels: ["a","e","i","o","u"]
+	},
 	numbers = [0,1,2,3,4,5,6,7,8,9],
-	numbers_length = numbers.length,
-	punctuation = ["!","+","%","&","(",")","=","?","_","-","*","-","#","$","½","{","[","]","}",",",".","<",">"],
-	punctuation_length = punctuation.length;
-	//Declaring required variables
-	var isPreviousVowel, isPreviousConsonant, isPreviousConsonantx2, i;
-	//Generating part
-	if(isReadable) {
-		isPreviousVowel = false;
-		isPreviousConsonant = false;
-		isPreviousConsonantx2 = false;
-		var randNumber = Math.floor(Math.random()*2);
-		if(randNumber === 1){
-			isPreviousVowel = true;
+	specialChars = ["!","+","%","&","(",")","=","?","_","-","*","-","#","$","½","{","[","]","}",",",".","<",">"],
+	prevVowel = false, prevConso = false, prevConsox2 = false,//these variables are for readability part
+	i, chars;
+	if(readable){
+		//What we do here is this, if the password ends with a vowel, we can add a consonant, 
+		//if the password ends with a consonant, we can add a vowel or a consonant,
+		//if the password ends with double consonant, we should add a vowel
+		if(Math.floor(Math.random() * 2)){
+			prevVowel = true;
 		}else{
-			isPreviousConsonant = true;
+			prevConso = true;
 		}
-		for(i = 0; i < length; i++){
-			//If previous letter is a vowel, add consonant
-			if(isPreviousVowel){
-				randNumber = Math.floor(Math.random() * consonants_length);
-				password += consonants[randNumber];
-				isPreviousVowel = false;
-				isPreviousConsonant = true;
-				isPreviousConsonantx2 = false;
-			//if previous letter is a consonant, add consonant or vowel
-			}else if(isPreviousConsonant){
-				randNumber = Math.floor(Math.random() * 2);
-				if(randNumber === 0){
-					randNumber = Math.floor(Math.random() * consonants_length);
-					password += consonants[randNumber];
-					isPreviousVowel = false;
-					isPreviousConsonant = false;
-					isPreviousConsonantx2 = true;
+		for (i = 0; i < length; i++) {
+			if(prevVowel){
+				password += letters.consonants[Math.floor(Math.random() * letters.consonants.length)];
+				prevVowel = false;
+				prevConso = true;
+				prevConsox2 = false;
+			}else if(prevConso){
+				if(Math.floor(Math.random) * 2){
+					password += letters.vowels[Math.floor(Math.random() * letters.vowels.length)];
+					prevVowel = true;
+					prevConso = false;
+					prevConsox2 = false;
 				}else{
-					randNumber = Math.floor(Math.random() * vowels_length);
-					password += vowels[randNumber];
-					isPreviousVowel = true;
-					isPreviousConsonant = false;
-					isPreviousConsonantx2 = false;
+					password += letters.consonants[Math.floor(Math.random() * letters.consonants.length)];
+					prevVowel = false;
+					prevConso = false;
+					prevConsox2 = true;
 				}
-			//If preious letter is a doubled consonant, add vowel
-			}else if(isPreviousConsonantx2){
-				randNumber = Math.floor(Math.random() * vowels_length);
-				password += vowels[randNumber];
-				isPreviousVowel = true;
-				isPreviousConsonant = false;
-				isPreviousConsonantx2 = false;
+			}else{
+				password += letters.vowels[Math.floor(Math.random() * letters.vowels.length)];
+				prevVowel = true;
+				prevConso = false;
+				prevConsox2 = false;
 			}
 		}
-		if(hasUpperCase){
-			for(i = 0; i < password.length; i++){
-				randNumber = Math.floor(Math.random() * 2);
-				if(randNumber === 1){
-					password[i] = password[i].toUpperCase();
+		if(upperCase){
+			passwordSplit = password.split("");
+			for(i in passwordSplit){
+				if(Math.floor(Math.random() * 2)){
+					passwordSplit[i] = passwordSplit[i].toUpperCase();
 				}
+			}
+		}
+		password = passwordSplit.join("");
+	}else{
+		chars = [];//character holder array for our passwords
+		if(letter) chars = chars.concat(letters.consonants, letters.vowels);
+		if(number) chars = chars.concat(numbers);
+		if(specialChar) chars = chars.concat(specialChars);
+		for (i = 0; i < length; i++) {
+			password += chars[Math.floor(Math.random() * chars.length)];
+		}
+	}
+	if(upperCase){
+		passwordSplit = password.split("");
+		for(i in passwordSplit){
+			if(Math.floor(Math.random() * 2)){
+				passwordSplit[i] = passwordSplit[i].toUpperCase();
 			}
 		}
 	}
-	else{
-		var chars = [];
-		var letters = ["b","c","d","f","g","h","j","k","l","m","n","p","r","s","t","v","y","z","x","q","w","a","e","i","o","u"];
-		var letters_length = letters.length;
-		if(hasNumber){
-			chars.push(0,1,2,3,4,5,6,7,8,9);
-		}
-		if(hasPunctuation){
-			chars.push("!","+","%","&","(",")","=","?","_","-","*","-","#","$","½","{","[","]","}",",",".","<",">");
-		}
-		var chars_length = chars.length;
-		
-		if(!hasLetter && !hasNumber && !hasPunctuation){
-			return "Cannot create a password, you should choose at least one password characters";
-		}else{
-			for(var y = 0; y < length; y++){
-				var passchar;
-				var randNumber = Math.floor(Math.random() * 2);
-				if(hasLetter && !hasNumber && !hasPunctuation){
-					randNumber = Math.floor(Math.random() * letters_length);
-					passchar = letters[randNumber];
-					randNumber = Math.floor(Math.random() * 2);
-					if(hasUpperCase && randNumber === 0){
-						passchar = passchar.toUpperCase();
-					}
-					password += passchar;
-				}else if(hasLetter && randNumber === 1){
-					randNumber = Math.floor(Math.random() * letters_length);
-					passchar = letters[randNumber];
-					randNumber = Math.floor(Math.random() * 2);
-					if(hasUpperCase && randNumber === 0){
-						passchar = passchar.toUpperCase();
-					}
-					password += passchar;
-				}else{
-					randNumber = Math.floor(Math.random() * chars_length);
-					var passchar = chars[randNumber];
-					password += passchar;
-				}
-			}
-		}
-	}
-    return password;
+	return password;
 };
