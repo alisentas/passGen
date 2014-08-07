@@ -72,8 +72,8 @@ var passGen = function(opts){
 					passwordSplit[i] = passwordSplit[i].toUpperCase();
 				}
 			}
+			password = passwordSplit.join("");
 		}
-		password = passwordSplit.join("");
 	}else{
 		chars = [];//character holder array for our passwords
 		if(letter) chars = chars.concat(letters.consonants, letters.vowels);
@@ -90,6 +90,7 @@ var passGen = function(opts){
 				passwordSplit[i] = passwordSplit[i].toUpperCase();
 			}
 		}
+		password = passwordSplit.join("");
 	}
 	return password;
 };
