@@ -16,7 +16,7 @@ passGen({
     readable: false,
     letter: true,
     number: true,
-    uppercase: true,
+    upperCase: true,
     specialChar: true,
 })
 ```
