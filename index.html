@@ -4,14 +4,14 @@
 	<title>Ana Sayfa</title>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
-	<script src="https://www.rawgit.com/alisentas/passGen/master/passgen.js" type="text/javascript"></script>
+	<script src="http://rawgit.com/alisentas/passGen/master/passgen.min.js" type="text/javascript"></script>
 	<meta charset="utf-8">
 	<style>
 		body {
 			/* Full page background found from css-tricks.com
 			http://css-tricks.com/perfect-full-page-background-image/
 			*/
-			
+
 			background: url("http://securitysite.net/wp-content/uploads/2014/02/Frontpoint-vs-Simplisafe.jpg") no-repeat center center fixed;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
@@ -94,8 +94,6 @@
 								</div>
 							</div>
 						</div>
-						<div id="progress" class="progress">
-						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-2">
 								<button id="generate" class="btn btn-success">Generate</button>
@@ -110,10 +108,32 @@
 					<p>
 						Password generator is made by <a href="https://github.com/alisentas">Ali Şentaş</a> and you can watch/star/fork it on <a href="https://github.com/alisentas/passGen">Github Project</a>.
 					</p>
+					<p>
+						Background image: <a href="http://securitysite.net/">securitysite.net</a>
+					</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="https://www.rawgit.com/alisentas/passGen/gh-pages/js/script.js" type="text/javascript"></script>
+	<script>
+		$("#generate").click(function(e){
+			e.preventDefault();
+			var $length = parseInt($('#length').prop('value'),10);
+			var $isReadable = $('#isReadable').prop('checked');
+			var $hasLetter = $('#hasLetter').prop('checked');
+			var $hasNumber = $('#hasNumber').prop('checked');
+			var $hasUpperCase = $('#hasUpperCase').prop('checked');
+			var $hasPunctuation = $('#hasPunctuation').prop('checked');
+			var pass = passGen({
+				length: $length,
+				readable: $isReadable,
+				letter: $hasLetter,
+				number: $hasNumber,
+				upperCase: $hasUpperCase,
+				specialChar: $hasPunctuation
+			});
+			$('#password').val(pass);
+		});
+	</script>
 </body>
 </html>
