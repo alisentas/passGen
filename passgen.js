@@ -28,8 +28,8 @@ var passGen = function(opts){
 		vowels: "aeiou",
 	},
 	numbers = [0,1,2,3,4,5,6,7,8,9],
-	specialChars = ["!","+","%","&","(",")","=","?","_","-","*","-","#","$","�","{","[","]","}",",",".","<",">"],
-	prevVowel = false, prevConso = false, prevConsox2 = false,// these variables are for readability part
+	specialChars = ["!","+","%","&","(",")","=","?","_","-","*","-","#","$","{","[","]","}",",",".","<",">"],
+	prevVowel = false, prevConso = false, prevConsox2 = false, // these variables are for readability part
 	i, chars;
 
 	if(readable){
